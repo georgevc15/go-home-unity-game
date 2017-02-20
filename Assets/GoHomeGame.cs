@@ -6,6 +6,7 @@ public class GoHomeGame : MonoBehaviour
 
     public Vector2 playerLocation; // Distance in meters (x,y)
     public Vector2 homeLocation;
+    bool gameIsOver = false;
 
     // Use this for initialization
     void Start()
@@ -17,10 +18,14 @@ public class GoHomeGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateMovement(KeyCode.LeftArrow, new Vector2(-1, 0));
-        UpdateMovement(KeyCode.RightArrow, new Vector2(1, 0));
-        UpdateMovement(KeyCode.UpArrow, new Vector2(0, 1));
-        UpdateMovement(KeyCode.DownArrow, new Vector2(0, -1));
+        if (!gameIsOver)
+        {
+            UpdateMovement(KeyCode.LeftArrow, new Vector2(-1, 0));
+            UpdateMovement(KeyCode.RightArrow, new Vector2(1, 0));
+            UpdateMovement(KeyCode.UpArrow, new Vector2(0, 1));
+            UpdateMovement(KeyCode.DownArrow, new Vector2(0, -1));
+        } 
+
     }
 
     private void UpdateMovement(KeyCode kc, Vector2 movementVector) {
@@ -37,8 +42,8 @@ public class GoHomeGame : MonoBehaviour
         print("Distance to home " + pathToHome.magnitude);
         if (playerLocation == homeLocation)
         {
-            print("You have arrived home! ");
+              print("You have arrived home! ");
+              gameIsOver = true;
+            }
         }
-    }
-
 }
